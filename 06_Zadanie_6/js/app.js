@@ -1,41 +1,42 @@
 import React from "react";
 
-// let RandomNumbersList = ({props}) => {
-//     return (
-//         <div>
-//             wylosowane liczby {arr.join(', ')}
-//         </div>
-//     )
-// }
+let RandomNumbersList = ({ arr }) => {
+    return (
+        <ul>
+            {arr.map((el, i) => (
+                <li key={i}>{el}</li>
+            ))}
+        </ul>
+    );
+};
 
-let RandomNumbersInfo = ({props}) => {
+let RandomNumbersInfo = ({ min, max, count }) => {
     return (
         <div>
-            liczby z przedziału:<br/>
-            min = {min}<br/>
-            max = {max}<br/>
+            liczby z przedziału:
+            <br />
+            min = {min}
+            <br />
+            max = {max}
+            <br />
             ilość = {count}
         </div>
-    )
-}
+    );
+};
 
-let RandomNumbers = ({ props }) => {
-
-    let randomNr = () => {
-        let arr = [];
-
-        for (let i = 0; i < count; i++) {
-            arr.push(Math.floor(Math.random() * (max - min + 1)) + min);
-        }
-        return arr.join(', ');
-
-    };
+let RandomNumbers = ({ min, max, count }) => {
+    let arr = [];
+    for (let i = 0; i < count; i++) {
+        arr.push(Math.floor(Math.random() * (max - min + 1)) + min);
+    }
+    arr.join(", ");
 
     return (
-        <>wylosowane liczby w ilości {count} to {randomNr()}
-        <RandomNumbersInfo min={min} max={max} count={count}/>
+        <>
+            <RandomNumbersInfo min={min} max={max} count={count} />
+            <RandomNumbersList arr={arr} />
         </>
-        );
+    );
 };
 
 let min = 1;
@@ -46,7 +47,6 @@ export default function App() {
     return (
         <>
             <RandomNumbers min={min} max={max} count={count} />
-
         </>
-        );
+    );
 }
